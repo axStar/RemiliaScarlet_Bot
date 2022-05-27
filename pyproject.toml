@@ -8,9 +8,11 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.7.3"
 nonebot2 = "^2.0.0-beta.1"
+Pillow = "^9.1.1"
 
 [tool.poetry.dev-dependencies]
 nb-cli = "^0.6.0"
+autopep8 = "^1.6.0"
 
 [tool.nonebot]
 plugins = []
