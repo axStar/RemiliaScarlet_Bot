@@ -5,9 +5,7 @@ from nonebot.adapters.onebot.v11 import Event, Bot, MessageSegment
 
 eidolon = nonebot.on_command("平原")
 earth = nonebot.on_command("地球")
-
-
-
+vallis = nonebot.on_command("金星")
 
 
 @eidolon.handle()
@@ -20,6 +18,12 @@ async def _(bot: Bot, event: Event):
 
 
 @earth.handle()
-async def _(bot:Bot, event: Event):
+async def _(bot: Bot, event: Event):
     image = wfClock.earth()
     await earth.finish(MessageSegment.image(image))
+
+
+@vallis.handle()
+async def _(bot: Bot, event: Event):
+    image = wfClock.vallis()
+    await vallis.finish(MessageSegment.image(image))

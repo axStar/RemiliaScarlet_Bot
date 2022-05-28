@@ -48,7 +48,7 @@ class wfClock():
         stateStr = f"当前状态：{'白天' if isDay else '夜晚'}\n\n距离切换：{toNext.humanize(locale='zh-cn', only_distance=True, granularity=['hour', 'minute'])}"
         nightStr = "\n\n".join(nightList)
         timeImage = BytesIO()
-        img = Image.open("./src/plugins/clock/data/背景.png")
+        img = Image.open("./src/plugins/clock/data/夜灵背景.png")
         draw = ImageDraw.ImageDraw(img)
         tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 42)
         textW, textH = draw.textsize(stateStr, tfont)
@@ -58,18 +58,46 @@ class wfClock():
         img.save(timeImage, "png")
         return timeImage
 
-    @classmethod
-    def earth(cls) -> BytesIO:
+    @staticmethod
+    def earth() -> BytesIO:
         now = arrow.now().int_timestamp % 28800
         isDay = now < 14400
         leftSeconds = 14400 - (now % 14400)
         toNext = arrow.now().shift(seconds=leftSeconds)
-        earthState = "{}\n\n距离结束：{}".format("白天" if isDay else '夜晚', toNext.humanize(locale='zh-cn', only_distance=True, granularity=['hour', 'minute']))
-        earthImage =BytesIO()
-        img = Image.open("./src/plugins/clock/data/地球背景.png")
+        earthState = "{}\n\n距离结束：{}".format("白天" if isDay else '夜晚', toNext.humanize(
+            locale='zh-cn', only_distance=True, granularity=['hour', 'minute']))
+        earthImage = BytesIO()
+        img = Image.open("./src/plugins/clock/data/时间背景.png")
         draw = ImageDraw.ImageDraw(img)
         tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 32)
         textW, textH = draw.textsize(earthState, tfont)
-        draw.text(((400-textW)/2, (400-textH)/2), earthState, font=tfont, align="center")
+        draw.text(((400-textW)/2, (400-textH)/2),
+                  earthState, font=tfont, align="center")
         img.save(earthImage, "png")
         return earthImage
+
+    @staticmethod
+    def vallis() -> BytesIO:
+        start = arrow.get("2018-11-10 08:13:48")
+        loop = 1600
+        cold = 400
+        sinceLast = (arrow.now().int_timestamp - start.int_timestamp) % loop
+        toNextFull = loop - sinceLast
+        state = "寒冷"
+        if (toNextFull > cold):
+            state = "温暖"
+            toNextMinor = toNextFull - cold
+        else:
+            toNextMinor = toNextFull
+
+        stateStr = "{}\n\n距离结束：{}".format(state, arrow.now().shift(seconds=toNextMinor).humanize(
+            locale='zh-cn', only_distance=True, granularity=['hour', 'minute']))
+        vallisImage = BytesIO()
+        img = Image.open("./src/plugins/clock/data/时间背景.png")
+        draw = ImageDraw.ImageDraw(img)
+        tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 32)
+        textW, textH = draw.textsize(stateStr, tfont)
+        draw.text(((400-textW)/2, (400-textH)/2),
+                  stateStr, font=tfont, align="center")
+        img.save(vallisImage, "png")
+        return vallisImage
