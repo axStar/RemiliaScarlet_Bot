@@ -48,9 +48,9 @@ class wfClock():
         stateStr = f"当前状态：{'白天' if isDay else '夜晚'}\n\n距离切换：{toNext.humanize(locale='zh-cn', only_distance=True, granularity=['hour', 'minute', 'second'])}"
         nightStr = "\n\n".join(nightList)
         timeImage = BytesIO()
-        img = Image.open("./src/plugins/clock/data/夜灵背景.png")
+        img = Image.open("./src/PIL/夜灵背景.png")
         draw = ImageDraw.ImageDraw(img)
-        tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 55)
+        tfont = ImageFont.truetype("./src/PIL/font1.ttf", 55)
         textW, textH = draw.textsize(stateStr, tfont)
         draw.text(((800-textW)/2, (368-textH)/2),
                   stateStr, font=tfont, align="center")
@@ -68,9 +68,9 @@ class wfClock():
         earthState = "当前状态：{}\n\n距离结束：{}".format("白天" if isDay else '夜晚', toNext.humanize(
             locale='zh-cn', only_distance=True, granularity=['hour', 'minute', 'second']))
         earthImage = BytesIO()
-        img = Image.open("./src/plugins/clock/data/时间背景.png")
+        img = Image.open("./src/PIL/时间背景.png")
         draw = ImageDraw.ImageDraw(img)
-        tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 28)
+        tfont = ImageFont.truetype("./src/PIL/font1.ttf", 28)
         textW, textH = draw.textsize(earthState, tfont)
         draw.text(((400-textW)/2, (400-textH)/2),
                   earthState, font=tfont, align="center")
@@ -94,9 +94,9 @@ class wfClock():
         stateStr = "当前状态：{}\n\n距离结束：{}".format(state, arrow.now().shift(seconds=toNextMinor).humanize(
             locale='zh-cn', only_distance=True, granularity=['hour', 'minute', 'second']))
         vallisImage = BytesIO()
-        img = Image.open("./src/plugins/clock/data/时间背景.png")
+        img = Image.open("./src/PIL/时间背景.png")
         draw = ImageDraw.ImageDraw(img)
-        tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 28)
+        tfont = ImageFont.truetype("./src/PIL/font1.ttf", 28)
         textW, textH = draw.textsize(stateStr, tfont)
         draw.text(((400-textW)/2, (400-textH)/2),
                   stateStr, font=tfont, align="center")
@@ -127,9 +127,9 @@ class wfClock():
         toNext = toNight if isDay else jobEnd
         stateStr = f"当前状态：{'Fass' if isDay else 'Vome'}\n\n距离结束：{toNext.humanize(locale='zh-cn', only_distance=True, granularity=['hour', 'minute', 'second'])}"
         timeImage = BytesIO()
-        img = Image.open("./src/plugins/clock/data/时间背景.png")
+        img = Image.open("./src/PIL/时间背景.png")
         draw = ImageDraw.ImageDraw(img)
-        tfont = ImageFont.truetype("./src/plugins/clock/data/font1.ttf", 28)
+        tfont = ImageFont.truetype("./src/PIL/font1.ttf", 28)
         textW, textH = draw.textsize(stateStr, tfont)
         draw.text(((400-textW)/2, (400-textH)/2),
                   stateStr, font=tfont, align="center")
